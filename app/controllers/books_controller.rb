@@ -8,7 +8,13 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    to = Time.current.at_end_of_day #本日の最終時刻
+    from = (to - 6.day).at_beginning_of_day #6日前の最初時刻
+    @books = Book.all.sort {|a,b|
+      b.favorites.where(created_at: from...to).size <=>
+      a.favorites.where(created_at: from...to).size
+    }
+    
     @book = Book.new
   end
 

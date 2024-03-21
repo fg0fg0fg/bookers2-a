@@ -2,6 +2,8 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  #has_many :favorited_users, througth: :favorites, source: :user
+  #BookはFavoriteを通じてUserへの間接的に繋がる
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
   

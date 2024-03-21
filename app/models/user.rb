@@ -9,13 +9,12 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  #複数のfo架空のテーブルを所持、Reクラスを参照、外部キーfoカラム
-  #フォローしている人
-  #フォローされている人
+  #フォローする人(User)->relationshipsを持っている紐づけはfollower_id
+  #フォローされる人(User)->relationshipsを持っている紐づけはfollowed_id
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  #自分がフォローしている人
-  #自分をフォローしている人
+  #自身がフォローしている全ユーザー,モデルを通して,followedを参照
+  #自身をフォローしている全ユーザー
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
