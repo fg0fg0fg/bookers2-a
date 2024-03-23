@@ -16,7 +16,7 @@ class User < ApplicationRecord
   #自身がフォローしている全ユーザー,モデルを通して,followedを参照
   #自身をフォローしている全ユーザー
   has_many :entries, dependent: :destroy
-  has_many :messages, dependent: :destroy
+  has_many :chats, dependent: :destroy
   has_many :rooms, through: :entries
 
   has_one_attached :profile_image
