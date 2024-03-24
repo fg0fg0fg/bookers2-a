@@ -19,7 +19,8 @@
         <td class="heart_<%= book.id %>">
           <%= render "favorites/heart", book: book %>
         </td>
-        <td>コメント数: <%= book.book_comments.count %></td>
+        <td><%= render "book_comments/count", book: book %></td>
+        <td><%= render "books/count", book: book %></td>
       </tr>
     <% end %>
   </tbody>
